@@ -79,11 +79,11 @@ namespace IdentityServer
                         new Secret("secret".Sha256())
                     },
                     // where to redirect to after login
-                    RedirectUris = { "http://localhost:5002/signin-oidc" },
+                    RedirectUris = { "https://localhost:44319/signin-oidc" },
 
                     // where to redirect to after logout
                     // to automate redirect to login page, set AccountOptions.AutomaticRedirectAfterSignOut = true
-                    PostLogoutRedirectUris = { "http://localhost:5002/signout-callback-oidc" },
+                    PostLogoutRedirectUris = { "https://localhost:44319/signout-callback-oidc" },
 
                     AllowedScopes =
                     {
@@ -104,9 +104,9 @@ namespace IdentityServer
                     AllowedGrantTypes = GrantTypes.Implicit,
                     AllowAccessTokensViaBrowser = true,
 
-                    RedirectUris =           { "http://localhost:5003/callback.html" },
-                    PostLogoutRedirectUris = { "http://localhost:5003/index.html" },
-                    AllowedCorsOrigins =     { "http://localhost:5003" },
+                    RedirectUris =           { "https://localhost:44380/callback.html" },
+                    PostLogoutRedirectUris = { "https://localhost:44380/index.html" },
+                    AllowedCorsOrigins =     { "https://localhost:44380" },
 
                     AllowedScopes =
                     {

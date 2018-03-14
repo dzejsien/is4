@@ -30,7 +30,7 @@ namespace WebApi
             services.AddAuthentication("Bearer")
                 .AddIdentityServerAuthentication(options =>
                 {
-                    options.Authority = "http://localhost:5000";
+                    options.Authority = "https://localhost:44327";
                     options.RequireHttpsMetadata = false;
                     options.ApiName = "api1";
                 });
@@ -40,7 +40,7 @@ namespace WebApi
                 // this defines a CORS policy called "default"
                 options.AddPolicy("default", policy =>
                 {
-                    policy.WithOrigins("http://localhost:5003")
+                    policy.WithOrigins("https://localhost:44380")
                         .AllowAnyHeader()
                         .AllowAnyMethod();
                 });
