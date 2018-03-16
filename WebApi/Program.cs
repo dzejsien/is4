@@ -1,14 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Net;
+﻿using System.Net;
 using System.Security.Cryptography.X509Certificates;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.Logging;
 
 namespace WebApi
 {
@@ -16,7 +9,7 @@ namespace WebApi
     {
         public static void Main(string[] args)
         {
-            BuildWebHostOld(args).Run();
+            BuildWebHost(args).Run();
         }
 
         public static IWebHost BuildWebHostOld(string[] args)
@@ -36,7 +29,7 @@ namespace WebApi
             {
                 computerCaStore.Open(OpenFlags.ReadOnly);
                 X509Certificate2Collection certificatesInStore = computerCaStore.Certificates;
-                findResult = certificatesInStore.Find(X509FindType.FindBySubjectName, "weblocal", false)[0];
+                findResult = certificatesInStore.Find(X509FindType.FindBySubjectName, "localhost", false)[0];
             }
             finally
             {
@@ -48,7 +41,7 @@ namespace WebApi
                 .UseKestrel(options =>
                 {
                     //options.Listen(IPAddress.Loopback, 5000);
-                    options.Listen(IPAddress.Loopback, 5000, listenOptions =>
+                    options.Listen(IPAddress.Loopback, 5001, listenOptions =>
                     {
                         listenOptions.UseHttps(findResult);
                     });

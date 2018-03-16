@@ -34,7 +34,7 @@ namespace WebApplication
             .AddCookie("Cookies")
             .AddOpenIdConnect("oidc", options => {
                 options.SignInScheme = "Cookies";
-                options.Authority = "https://localhost:44327";
+                options.Authority = "https://localhost:5000";
                 options.RequireHttpsMetadata = true;
                 options.ClientId = "mvc";
                 options.ClientSecret = "secret";

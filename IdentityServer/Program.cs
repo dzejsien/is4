@@ -11,7 +11,7 @@ namespace IdentityServer
     {
         public static void Main(string[] args)
         {
-            BuildWebHostOld(args).Run();
+            BuildWebHost(args).Run();
         }
 
         public static IWebHost BuildWebHostOld(string[] args)
@@ -26,7 +26,7 @@ namespace IdentityServer
             // https://dotnetcodr.com/2015/06/08/https-and-x509-certificates-in-net-part-4-working-with-certificates-in-code/
             X509Certificate2 findResult = null;
             X509Store computerCaStore = new X509Store(StoreName.My, StoreLocation.LocalMachine);
-            findResult = IdentityModel.X509.CurrentUser.My.SubjectDistinguishedName.Find("web.local").FirstOrDefault();
+            findResult = IdentityModel.X509.CurrentUser.My.SubjectDistinguishedName.Find("localhost").FirstOrDefault();
 
             try
             {
@@ -43,7 +43,7 @@ namespace IdentityServer
                 //    Debug.WriteLine("-----------------------------------");
                 //}
 
-                findResult = certificatesInStore.Find(X509FindType.FindBySubjectName, "web.local", false)[0];
+                findResult = certificatesInStore.Find(X509FindType.FindBySubjectName, "localhost", false)[0];
             }
             finally
             {
