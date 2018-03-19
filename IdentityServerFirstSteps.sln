@@ -13,6 +13,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebApplication", "WebApplic
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JavaScriptClient", "JavaScriptClient\JavaScriptClient.csproj", "{7B9D89F9-A394-4D86-ACDC-37CE76C615C9}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InternalWebApi", "InternalWebApi\InternalWebApi.csproj", "{F9F4D2D7-E423-4D97-A129-2889D1C2D1D2}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{7B9D89F9-A394-4D86-ACDC-37CE76C615C9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7B9D89F9-A394-4D86-ACDC-37CE76C615C9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7B9D89F9-A394-4D86-ACDC-37CE76C615C9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F9F4D2D7-E423-4D97-A129-2889D1C2D1D2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F9F4D2D7-E423-4D97-A129-2889D1C2D1D2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F9F4D2D7-E423-4D97-A129-2889D1C2D1D2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F9F4D2D7-E423-4D97-A129-2889D1C2D1D2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

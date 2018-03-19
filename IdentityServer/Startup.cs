@@ -74,26 +74,27 @@ namespace IdentityServer
                     options.Events.RaiseSuccessEvents = true;
                 })
                 .AddDeveloperSigningCredential()
-                //.AddInMemoryPersistedGrants()
-                .AddOperationalStore(options =>
-                {
-                    options.ConfigureDbContext = builder =>
-                        builder.UseSqlServer(Configuration.GetConnectionString("ISData"),
-                            sql => sql.MigrationsAssembly(migrationsAssembly));
+                .AddExtensionGrantValidator<DelegationGrantValidator>()
+                .AddInMemoryPersistedGrants()
+                //.AddOperationalStore(options =>
+                //{
+                //    options.ConfigureDbContext = builder =>
+                //        builder.UseSqlServer(Configuration.GetConnectionString("ISData"),
+                //            sql => sql.MigrationsAssembly(migrationsAssembly));
 
-                    // this enables automatic token cleanup. this is optional.
-                    options.EnableTokenCleanup = true;
-                    options.TokenCleanupInterval = 30;
-                })
-                //.AddInMemoryApiResources(Config.GetApiResources())
-                //.AddInMemoryIdentityResources(Config.GetIdentityResources())
-                //.AddInMemoryClients(Config.GetClients())
-                .AddConfigurationStore(options =>
-                {
-                    options.ConfigureDbContext = builder =>
-                        builder.UseSqlServer(Configuration.GetConnectionString("ISData"),
-                            sql => sql.MigrationsAssembly(migrationsAssembly));
-                })
+                //    // this enables automatic token cleanup. this is optional.
+                //    options.EnableTokenCleanup = true;
+                //    options.TokenCleanupInterval = 30;
+                //})
+                .AddInMemoryApiResources(Config.GetApiResources())
+                .AddInMemoryIdentityResources(Config.GetIdentityResources())
+                .AddInMemoryClients(Config.GetClients())
+                //.AddConfigurationStore(options =>
+                //{
+                //    options.ConfigureDbContext = builder =>
+                //        builder.UseSqlServer(Configuration.GetConnectionString("ISData"),
+                //            sql => sql.MigrationsAssembly(migrationsAssembly));
+                //})
                 //.AddTestUsers(Config.GetUsers());
                 .AddAspNetIdentity<ApplicationUser>();
 
@@ -125,7 +126,7 @@ namespace IdentityServer
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
         {
-            InitializeDatabase(app);
+            //InitializeDatabase(app);
 
             loggerFactory.AddConsole(LogLevel.Trace);
 

@@ -1,4 +1,5 @@
 ﻿using IdentityModel.Client;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
 using System.Net.Http;
@@ -28,17 +29,23 @@ namespace Client
             var client = new HttpClient();
             client.SetBearerToken(tokenResponse.AccessToken);
 
-            var response = await client.GetAsync("https://localhost:5001/identity");
+            var response = await client.GetAsync("https://localhost:5001/identity/getFromInternal");
+            //below shouldnt work, access to 5003 only from 5001 (above)
+            //var response = await client.GetAsync("https://localhost:5003/identity/getFromInternal");
+            //var response = await client.GetAsync("https://localhost:5001/identity");
+
             if (!response.IsSuccessStatusCode)
             {
-                Console.WriteLine(response.StatusCode);
+                Console.WriteLine($"Code:{response.StatusCode}, {response.ReasonPhrase}, {response.Headers.ToString()}");
             }
             else
             {
                 var content = await response.Content.ReadAsStringAsync();
                 Console.WriteLine(JArray.Parse(content));
-                Console.ReadKey();
+                //Console.WriteLine(content);
             }
+
+            Console.ReadKey();
         }
 
         private static async Task<TokenResponse> RequestClientCredentails(DiscoveryResponse disco)
@@ -75,5 +82,6 @@ namespace Client
 
             return tokenResponse;
         }
+
     }
 }

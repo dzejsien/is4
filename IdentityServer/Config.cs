@@ -12,7 +12,8 @@ namespace IdentityServer
         {
             return new List<ApiResource>
             {
-                new ApiResource("api1", "My API")
+                new ApiResource("api1", "My API"),
+                new ApiResource("api2_internal", "My internal API")
             };
         }
 
@@ -114,6 +115,13 @@ namespace IdentityServer
                         IdentityServerConstants.StandardScopes.Profile,
                         "api1"
                     }
+                },
+                new Client
+                {
+                    ClientId = "api1.client",
+                    ClientSecrets = new List<Secret> { new Secret("secret".Sha256()) },
+                    AllowedGrantTypes = { "delegation" },
+                    AllowedScopes = { "api2_internal" } 
                 }
             };
         }
