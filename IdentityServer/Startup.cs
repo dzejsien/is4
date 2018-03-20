@@ -103,14 +103,20 @@ namespace IdentityServer
             services.AddAuthentication()
                 .AddGoogle("Google", options =>
                 {
-                    options.SignInScheme = IdentityServerConstants.ExternalCookieAuthenticationScheme;
+                    /*
+                     * When using external authentication with ASP.NET Core Identity, the SignInScheme must be 
+                     * set to "Identity.External" instead of IdentityServerConstants.ExternalCookieAuthenticationScheme.
+                     * - ustawilem na te scheme w account (IdentityServerConstants.ExternalCookieAuthenticationScheme) i dziala - czemu musi byc tak?
+                     * - zostawiam jak jest zalecane przy Identity (default - nie trzeba podawac signinscheme ponizej)
+                     */
+                    //options.SignInScheme = IdentityServerConstants.ExternalCookieAuthenticationScheme;
 
                     options.ClientId = "443835541725-ujk1on91cuqd2ev9jjlugu9tuklj47tb.apps.googleusercontent.com";
                     options.ClientSecret = "SyQzQNm3mDUtJKuaJ0aAMgxb";
                 })
                 .AddOpenIdConnect("oidc", "OpenID Connect", options =>
                 {
-                    options.SignInScheme = IdentityServerConstants.ExternalCookieAuthenticationScheme;
+                    //options.SignInScheme = IdentityServerConstants.ExternalCookieAuthenticationScheme;
                     options.SignOutScheme = IdentityServerConstants.SignoutScheme;
 
                     options.Authority = "https://demo.identityserver.io/";
