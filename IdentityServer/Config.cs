@@ -31,7 +31,7 @@ namespace IdentityServer
                     DisplayName = "Custom user claims",
                     UserClaims =
                     {
-                        "testClaim"
+                        "testClaim", "firstname", "lastname"
                     }
                 }
             };

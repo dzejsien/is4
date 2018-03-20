@@ -51,6 +51,8 @@ namespace WebApplication
                 options.GetClaimsFromUserInfoEndpoint = true;
                 options.ClaimActions.MapJsonKey("website", "website");
                 options.ClaimActions.MapJsonKey("testClaim", "testClaim");
+                options.ClaimActions.MapJsonKey("firstname", "firstname");
+                options.ClaimActions.MapJsonKey("lastname", "lastname");
                 options.Events = new OpenIdConnectEvents()
                 {
                     OnTokenValidated = context =>
