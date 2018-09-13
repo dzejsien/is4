@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Security.Cryptography.X509Certificates;
@@ -24,9 +25,9 @@ namespace IdentityServer
         public static IWebHost BuildWebHost(string[] args)
         {
             // https://dotnetcodr.com/2015/06/08/https-and-x509-certificates-in-net-part-4-working-with-certificates-in-code/
-            X509Certificate2 findResult = null;
+            X509Certificate2 cert = null;
             X509Store computerCaStore = new X509Store(StoreName.My, StoreLocation.LocalMachine);
-            findResult = IdentityModel.X509.CurrentUser.My.SubjectDistinguishedName.Find("localhost").FirstOrDefault();
+            cert = IdentityModel.X509.CurrentUser.My.SubjectDistinguishedName.Find("localhost").FirstOrDefault();
 
             try
             {
@@ -43,7 +44,7 @@ namespace IdentityServer
                 //    Debug.WriteLine("-----------------------------------");
                 //}
 
-                findResult = certificatesInStore.Find(X509FindType.FindBySubjectName, "localhost", false)[0];
+                cert = certificatesInStore.Find(X509FindType.FindBySubjectName, "localhost", false)[0];
             }
             finally
             {
@@ -51,15 +52,17 @@ namespace IdentityServer
             }
 
             return WebHost.CreateDefaultBuilder(args)
-                .UseStartup<Startup>()
                 .UseKestrel(options =>
                 {
                     //options.Listen(IPAddress.Loopback, 5000);
                     options.Listen(IPAddress.Loopback, 5000, listenOptions =>
                     {
-                        listenOptions.UseHttps(findResult);
+                        listenOptions.UseHttps(cert);
                     });
                 })
+                .UseContentRoot(Directory.GetCurrentDirectory())
+                .UseIISIntegration()
+                .UseStartup<Startup>()
                 .Build();
         }
     }
